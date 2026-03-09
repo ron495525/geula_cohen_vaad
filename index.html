@@ -18,7 +18,7 @@ body {
   direction: rtl;
 }
 
-/* INTRO */
+/* ─── INTRO / EPISODE SELECT ─── */
 #intro-screen {
   position: fixed;
   inset: 0;
@@ -29,41 +29,77 @@ body {
   justify-content: center;
   flex-direction: column;
   gap: 18px;
+  overflow-y: auto;
+  padding: 20px;
 }
 #intro-screen.hidden { animation: fadeOut 0.5s ease forwards; }
 @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+
 .intro-logo { font-size: 72px; animation: bounce 1.8s ease-in-out infinite alternate; }
 @keyframes bounce { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(-12px) rotate(3deg); } }
 .intro-title { font-size: 36px; font-weight: 800; color: #00a884; letter-spacing: -1px; }
-.intro-subtitle { font-size: 15px; color: #8696a0; text-align: center; max-width: 300px; line-height: 1.5; }
-.intro-episode {
+.intro-subtitle { font-size: 15px; color: #8696a0; text-align: center; max-width: 340px; line-height: 1.5; }
+
+/* Episode select grid */
+#ep-select-label {
+  font-size: 11px;
+  color: #8696a0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+#ep-grid {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 560px;
+}
+.ep-card {
   background: rgba(255,255,255,0.04);
   border: 1px solid #2a3942;
   border-radius: 14px;
-  padding: 18px 28px;
+  padding: 18px 22px;
   text-align: center;
-  max-width: 320px;
-}
-.intro-ep-label { font-size: 11px; color: #8696a0; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-.intro-ep-title { font-size: 22px; font-weight: 700; color: #e9edef; }
-.intro-ep-desc { font-size: 13px; color: #8696a0; margin-top: 8px; line-height: 1.5; }
-#start-btn {
-  background: #00a884;
-  color: white;
-  border: none;
-  border-radius: 28px;
-  padding: 14px 44px;
-  font-size: 18px;
-  font-weight: 700;
+  width: 230px;
   cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s;
-  margin-top: 4px;
-  box-shadow: 0 4px 20px rgba(0,168,132,0.3);
+  transition: all 0.22s;
+  position: relative;
 }
-#start-btn:hover { background: #00c9a0; transform: scale(1.05); box-shadow: 0 6px 28px rgba(0,168,132,0.5); }
+.ep-card:hover {
+  border-color: #00a884;
+  background: rgba(0,168,132,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,168,132,0.2);
+}
+.ep-card.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.ep-card.locked:hover {
+  border-color: #2a3942;
+  background: rgba(255,255,255,0.04);
+  transform: none;
+  box-shadow: none;
+}
+.ep-card-emoji { font-size: 36px; margin-bottom: 8px; }
+.ep-card-num { font-size: 10px; color: #8696a0; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+.ep-card-title { font-size: 20px; font-weight: 700; color: #e9edef; margin-bottom: 6px; }
+.ep-card-sub { font-size: 12px; color: #8696a0; line-height: 1.5; }
+.ep-lock-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
+}
+.ep-play-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #00a884;
+  font-weight: 600;
+}
 
-/* HEADER */
+/* ─── HEADER ─── */
 #header {
   background: #202c33;
   padding: 10px 16px;
@@ -87,7 +123,7 @@ body {
 #header-sub { font-size: 12px; color: #8696a0; margin-top: 1px; }
 .header-icons { display: flex; gap: 16px; color: #aebac1; font-size: 20px; }
 
-/* GOAL BAR */
+/* ─── GOAL BAR ─── */
 #goal-bar {
   background: #1a2530;
   padding: 7px 16px;
@@ -102,10 +138,10 @@ body {
 #goal-bar-outer { width: 80px; height: 5px; background: #2a3942; border-radius: 3px; overflow: hidden; flex-shrink: 0; }
 #goal-bar-fill { height: 100%; background: #00a884; border-radius: 3px; width: 0%; transition: width 0.6s ease; }
 
-/* MAIN */
+/* ─── MAIN ─── */
 #main { display: flex; flex: 1; overflow: hidden; }
 
-/* SIDEBAR */
+/* ─── SIDEBAR ─── */
 #sidebar {
   width: 198px;
   background: #111b21;
@@ -136,7 +172,7 @@ body {
 .nb-fill { height: 100%; border-radius: 2px; transition: width 0.9s cubic-bezier(.25,.46,.45,.94); }
 .nb-vibe { font-size: 10px; color: #8696a0; margin-top: 5px; font-style: italic; }
 
-/* CHAT */
+/* ─── CHAT ─── */
 #chat-col { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 #chat-messages {
   flex: 1;
@@ -147,11 +183,11 @@ body {
 #chat-messages::-webkit-scrollbar { width: 5px; }
 #chat-messages::-webkit-scrollbar-thumb { background: #2a3942; border-radius: 3px; }
 
-/* DATE DIVIDER */
+/* ─── DATE DIVIDER ─── */
 .date-divider { text-align: center; margin: 12px 0; }
 .date-divider span { background: #182229; color: #8696a0; font-size: 11px; padding: 4px 12px; border-radius: 8px; border: 1px solid #2a3942; }
 
-/* MESSAGE */
+/* ─── MESSAGE ─── */
 .msg-wrap {
   display: flex;
   flex-direction: column;
@@ -160,7 +196,7 @@ body {
 }
 @keyframes msgIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
 .msg-wrap.player { align-items: flex-start; }
-.msg-wrap.other { align-items: flex-end; }
+.msg-wrap.other  { align-items: flex-end; }
 .msg-inner { display: flex; align-items: flex-end; gap: 6px; max-width: 78%; }
 .msg-wrap.player .msg-inner { flex-direction: row-reverse; }
 .msg-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; margin-bottom: 2px; }
@@ -172,7 +208,7 @@ body {
   position: relative;
   word-break: break-word;
 }
-.msg-wrap.other .msg-bubble { background: #202c33; border-radius: 0 8px 8px 8px; }
+.msg-wrap.other  .msg-bubble { background: #202c33; border-radius: 0 8px 8px 8px; }
 .msg-wrap.player .msg-bubble { background: #005c4b; border-radius: 8px 0 8px 8px; }
 .msg-sender { font-size: 12px; font-weight: 600; margin-bottom: 2px; padding-right: 34px; }
 .msg-meta { position: absolute; bottom: 4px; left: 8px; display: flex; align-items: center; gap: 3px; font-size: 11px; color: #8696a0; white-space: nowrap; }
@@ -180,7 +216,7 @@ body {
 .receipts { color: #53bdeb; font-size: 13px; }
 .emoji-msg .msg-bubble { background: transparent !important; font-size: 38px; padding: 4px 8px 20px 8px; }
 
-/* TYPING */
+/* ─── TYPING ─── */
 #typing-area {
   padding: 2px 14px 6px;
   display: none;
@@ -194,7 +230,7 @@ body {
 @keyframes tpulse { 0%,60%,100%{transform:scale(1);opacity:0.4} 30%{transform:scale(1.3);opacity:1} }
 #typing-name { font-size: 12px; color: #8696a0; }
 
-/* CHOICES */
+/* ─── CHOICES ─── */
 #choice-area {
   background: #182229;
   border-top: 1px solid #2a3942;
@@ -227,7 +263,7 @@ body {
 .choice-btn:active { transform: scale(0.97); }
 .choice-letter { color: #00a884; font-weight: 800; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
 
-/* NOTIFICATION */
+/* ─── NOTIFICATION ─── */
 #notif {
   position: fixed;
   top: 66px;
@@ -247,7 +283,7 @@ body {
 }
 #notif.show { transform: translateX(-50%) translateY(0); }
 
-/* END SCREEN */
+/* ─── END SCREEN ─── */
 #end-screen {
   display: none;
   position: fixed;
@@ -304,40 +340,49 @@ body {
 .em-vibe { font-size: 11px; color: #8696a0; margin-top: 1px; }
 .em-bar { height: 5px; background: #2a3942; border-radius: 3px; overflow: hidden; margin-top: 5px; }
 .em-fill { height: 100%; border-radius: 3px; width: 0%; transition: width 1s ease; }
-#replay-btn {
-  background: #00a884;
-  color: #fff;
+
+/* End screen buttons row */
+#end-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+#replay-btn, #ep-select-btn {
   border: none;
   border-radius: 26px;
-  padding: 13px 36px;
-  font-size: 16px;
+  padding: 13px 28px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.2s;
+}
+#replay-btn {
+  background: #00a884;
+  color: #fff;
   box-shadow: 0 3px 16px rgba(0,168,132,0.3);
 }
 #replay-btn:hover { background: #00c9a0; transform: scale(1.04); }
+#ep-select-btn {
+  background: #2a3942;
+  color: #e9edef;
+}
+#ep-select-btn:hover { background: #3a4f5c; transform: scale(1.04); }
 
-/* MOBILE */
+/* ─── MOBILE ─── */
 @media (max-width: 580px) {
   #sidebar { display: none; }
+  .ep-card { width: 100%; }
 }
 </style>
 </head>
 <body>
 
-<!-- INTRO -->
+<!-- INTRO / EPISODE SELECT -->
 <div id="intro-screen">
   <div class="intro-logo">🏠</div>
   <div class="intro-title">הוועד</div>
   <div class="intro-subtitle">סימולטור קבוצת הווטסאפ של הבניין הישראלי</div>
-  <div class="intro-episode">
-    <div class="intro-ep-label">פרק 1</div>
-    <div class="intro-ep-title">💀 המעלית</div>
-    <div class="intro-ep-desc">המעלית שבורה, מרים עולה על הגדר, ואתה — שכן חדש — זרוק ישר לתוך הדרמה</div>
+  <div id="ep-select-label">בחר פרק</div>
+  <div id="ep-grid">
+    <!-- cards injected by JS -->
   </div>
-  <button id="start-btn" onclick="startGame()">התחל לשחק ▶</button>
 </div>
 
 <!-- NOTIFICATION -->
@@ -356,7 +401,7 @@ body {
 <!-- GOAL BAR -->
 <div id="goal-bar">
   <div id="goal-label">🎯 מטרה:</div>
-  <div id="goal-text">תקן את המעלית לפני שהבניין מתפרק</div>
+  <div id="goal-text">טוען...</div>
   <div id="goal-bar-outer"><div id="goal-bar-fill"></div></div>
 </div>
 
@@ -404,27 +449,29 @@ body {
       </div>
     </div>
     <div id="end-meters"></div>
-    <button id="replay-btn" onclick="replayGame()">שחק שוב 🔄</button>
+    <div id="end-btns">
+      <button id="replay-btn" onclick="replayEpisode()">שחק שוב 🔄</button>
+      <button id="ep-select-btn" onclick="showEpisodeSelect()">בחר פרק 🏠</button>
+    </div>
   </div>
 </div>
+
+<!-- External data files -->
+<script src="characters.js"></script>
+<script src="episodes/episode-1.js"></script>
+<script src="episodes/episode-2.js"></script>
 
 <script>
 "use strict";
 
-// ─── CHARACTERS ───────────────────────────────────────────────
-const CHARS = {
-  uri:       { name: 'אורי',      short: 'א', color: '#7c4dff', floor: 'קומה 4' },
-  miriam:    { name: 'מרים',      short: 'מ', color: '#e53935', floor: 'קומה 3' },
-  yosi:      { name: 'יוסי',      short: 'י', color: '#1e88e5', floor: 'קומה 2' },
-  liat:      { name: 'ליאת',      short: 'ל', color: '#43a047', floor: 'קומה 1' },
-  valentina: { name: 'ולנטינה',   short: 'ו', color: '#fb8c00', floor: 'קומה 5' },
-};
+// ─── EPISODES REGISTRY ────────────────────────────────────────
+const EPISODES = [EPISODE_1, EPISODE_2];
 
-// ─── GAME STATE ────────────────────────────────────────────────
-let scores = { uri: 50, miriam: 50, yosi: 50, liat: 50, valentina: 50 };
+// ─── ENGINE STATE ─────────────────────────────────────────────
+let currentEpisode = null;
+let scores = {};
 let goalPct = 0;
-let choicePath = null;
-
+let currentPath = null;   // last path chosen (carries across beats)
 let msgTime = { h: 10, m: 28 };
 let queue = [];
 let busy = false;
@@ -436,7 +483,7 @@ function tick() {
   if (msgTime.m >= 60) { msgTime.m -= 60; msgTime.h++; }
   return pad(msgTime.h) + ':' + pad(msgTime.m);
 }
-function pad(n) { return String(n).padStart(2,'0'); }
+function pad(n) { return String(n).padStart(2, '0'); }
 
 // ─── AUDIO ─────────────────────────────────────────────────────
 let actx = null;
@@ -450,10 +497,10 @@ function beep(freq, dur) {
     g.gain.setValueAtTime(0.08, actx.currentTime);
     g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + (dur || 0.12));
     o.start(); o.stop(actx.currentTime + (dur || 0.12));
-  } catch(e){}
+  } catch(e) {}
 }
 
-// ─── METER COLOR ───────────────────────────────────────────────
+// ─── METER HELPERS ─────────────────────────────────────────────
 function meterColor(s) {
   if (s >= 70) return '#00a884';
   if (s >= 40) return '#ffc107';
@@ -471,12 +518,14 @@ function vibeText(s) {
 // ─── SIDEBAR ───────────────────────────────────────────────────
 function renderSidebar() {
   const list = document.getElementById('nb-list');
-  list.innerHTML = Object.entries(CHARS).map(([id, c]) => {
-    const s = scores[id];
+  if (!currentEpisode) { list.innerHTML = ''; return; }
+  list.innerHTML = currentEpisode.activeChars.map(id => {
+    const c = CHARACTERS[id];
+    const s = scores[id] || 50;
     return `
       <div class="neighbor-card" id="nb-${id}">
         <div class="nb-header">
-          <div class="nb-avatar" style="background:${c.color}">${c.short}</div>
+          <div class="nb-avatar" style="background:${c.color}">${c.avatar}</div>
           <div class="nb-name">${c.name}</div>
           <div class="nb-score">${Math.round(s)}</div>
         </div>
@@ -492,21 +541,22 @@ function renderSidebar() {
 function flashCard(id, positive) {
   const el = document.getElementById('nb-' + id);
   if (!el) return;
-  el.classList.remove('pos-flash','neg-flash');
+  el.classList.remove('pos-flash', 'neg-flash');
   void el.offsetWidth;
   el.classList.add(positive ? 'pos-flash' : 'neg-flash');
-  setTimeout(() => el.classList.remove('pos-flash','neg-flash'), 800);
+  setTimeout(() => el.classList.remove('pos-flash', 'neg-flash'), 800);
 }
 
 function changeScore(id, delta) {
+  if (!(id in scores)) return;
   scores[id] = Math.max(0, Math.min(100, scores[id] + delta));
   renderSidebar();
   flashCard(id, delta > 0);
-  const c = CHARS[id];
+  const c = CHARACTERS[id];
   notify((delta > 0 ? '📈 +' : '📉 ') + Math.abs(delta) + ' עם ' + c.name);
 }
 
-// ─── GOAL ──────────────────────────────────────────────────────
+// ─── GOAL BAR ──────────────────────────────────────────────────
 function setGoal(pct) {
   goalPct = Math.max(0, Math.min(100, pct));
   document.getElementById('goal-bar-fill').style.width = goalPct + '%';
@@ -522,13 +572,13 @@ function notify(text) {
   notifTimer = setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-// ─── ADD MESSAGE TO CHAT ───────────────────────────────────────
+// ─── ADD MESSAGE ───────────────────────────────────────────────
 function addMsg(opts) {
   // opts: { charId?, text, isPlayer?, isEmoji? }
   const chat = document.getElementById('chat-messages');
-  const c = opts.charId ? CHARS[opts.charId] : null;
+  const c = (opts.charId && CHARACTERS[opts.charId]) ? CHARACTERS[opts.charId] : null;
   const isPlayer = !!opts.isPlayer;
-  const isEmoji = !!opts.isEmoji;
+  const isEmoji  = !!opts.isEmoji;
   const t = tick();
 
   const wrap = document.createElement('div');
@@ -536,12 +586,10 @@ function addMsg(opts) {
   if (isEmoji) wrap.classList.add('emoji-msg');
 
   const senderHtml = (!isPlayer && c)
-    ? `<div class="msg-sender" style="color:${c.color}">${c.name}</div>`
-    : '';
+    ? `<div class="msg-sender" style="color:${c.color}">${c.name}</div>` : '';
 
   const avatarHtml = (!isPlayer && c)
-    ? `<div class="msg-avatar" style="background:${c.color}">${c.short}</div>`
-    : '';
+    ? `<div class="msg-avatar" style="background:${c.color}">${c.avatar}</div>` : '';
 
   const receipts = isPlayer ? `<span class="receipts">✓✓</span>` : '';
 
@@ -567,19 +615,14 @@ function showTyping(name) {
   const el = document.getElementById('typing-area');
   document.getElementById('typing-name').textContent = name + ' מקליד/ה...';
   el.classList.add('on');
-  const chat = document.getElementById('chat-messages');
-  chat.scrollTop = chat.scrollHeight;
+  document.getElementById('chat-messages').scrollTop = 9999;
 }
-
 function hideTyping() {
   document.getElementById('typing-area').classList.remove('on');
 }
 
-// ─── QUEUE SYSTEM ─────────────────────────────────────────────
-function enq(fn) {
-  queue.push(fn);
-  pump();
-}
+// ─── QUEUE SYSTEM ──────────────────────────────────────────────
+function enq(fn) { queue.push(fn); pump(); }
 
 function pump() {
   if (busy || queue.length === 0) return;
@@ -587,10 +630,10 @@ function pump() {
   queue.shift()(() => { busy = false; pump(); });
 }
 
-// Queue a character message
+// Queue a NPC message
 function qMsg(charId, text, typingMs, pauseMs, isEmoji) {
   enq((done) => {
-    const c = CHARS[charId];
+    const c = CHARACTERS[charId];
     showTyping(c.name);
     setTimeout(() => {
       hideTyping();
@@ -600,338 +643,175 @@ function qMsg(charId, text, typingMs, pauseMs, isEmoji) {
   });
 }
 
-// Queue a delay
+// Queue a simple notification (no typing bubble)
+function qNotify(text, delayMs) {
+  enq((done) => {
+    setTimeout(() => { notify(text); done(); }, delayMs || 600);
+  });
+}
+
+// Queue a wait
 function qWait(ms) {
   enq((done) => setTimeout(done, ms));
 }
 
 // Queue a choice prompt
-function qChoice(choices) {
+function qChoicePrompt(choices) {
   enq((done) => {
     renderChoices(choices);
     choiceDone = done;
   });
 }
 
-// ─── CHOICES ──────────────────────────────────────────────────
+// ─── CHOICES ───────────────────────────────────────────────────
 function renderChoices(choices) {
-  const area = document.getElementById('choice-area');
-  const list = document.getElementById('choices-list');
-  const letters = ['א', 'ב', 'ג'];
+  const area  = document.getElementById('choice-area');
+  const list  = document.getElementById('choices-list');
+  const letters = ['א', 'ב', 'ג', 'ד'];
 
   list.innerHTML = choices.map((c, i) => `
-    <button class="choice-btn" onclick="pickChoice(${i})">
+    <button class="choice-btn" onclick="makeChoice(${i})">
       <span class="choice-letter">${letters[i]})</span>
       <span>${c.text}</span>
     </button>
   `).join('');
 
   area.classList.add('on');
-  window._choices = choices;
+  window._pendingChoices = choices;
 }
 
-function pickChoice(i) {
+function makeChoice(i) {
   const area = document.getElementById('choice-area');
   area.classList.remove('on');
 
-  const choice = window._choices[i];
-  window._choices = null;
+  const choice = window._pendingChoices[i];
+  window._pendingChoices = null;
 
   // Show player bubble
-  addMsg({ text: choice.text, isPlayer: true });
+  addMsg({ text: choice.text, isPlayer: true, isEmoji: !!choice.isEmoji });
   beep(660, 0.08);
 
-  // Apply score effects
-  if (choice.fx) {
-    Object.entries(choice.fx).forEach(([id, v]) => changeScore(id, v));
+  // Apply relationship effects
+  if (choice.effects) {
+    Object.entries(choice.effects).forEach(([id, v]) => changeScore(id, v));
   }
 
   // Apply goal delta
-  if (choice.goal) setGoal(goalPct + choice.goal);
+  if (choice.goalDelta) setGoal(goalPct + choice.goalDelta);
 
-  // Store path
-  if (choice.path) choicePath = choice.path;
+  // Store path for branching (only overwrite if explicitly set)
+  if (choice.path !== undefined && choice.path !== null) {
+    currentPath = choice.path;
+  }
 
   const cb = choiceDone;
   choiceDone = null;
-  if (cb) cb();
+
+  // Route to the next beat
+  if (choice.next) {
+    if (cb) cb();
+    runBeat(choice.next);
+  } else {
+    if (cb) cb();
+  }
 }
 
-// ─── EPISODE 1 ────────────────────────────────────────────────
-function runEp1() {
+// ─── BEAT RUNNER ───────────────────────────────────────────────
+function runBeat(beatId) {
+  const beat = currentEpisode.beats.find(b => b.id === beatId);
+  if (!beat) { console.warn('Beat not found:', beatId); return; }
 
-  // ========== BEAT 1: THE INCITING EVENT ==========
-  qWait(700);
-
-  qMsg('uri',
-    'שלום לכולם 👋 כידוע, המעלית מקולקלת כבר שבוע. קיבלנו הצעת מחיר לתיקון — עלות משוערת: <strong>3,200 ש"ח</strong>. יש צורך להצביע. ✓✓',
-    1600);
-
-  qMsg('miriam',
-    'שבוע?! שָׁבוּעַיִים!! 😡 אני עם ארבע שקיות מהסופר ולא מסוגלת לעלות לקומה 3!! מישהו אכפת לו בכלל?? יש פה ועד או סיפור??',
-    2000);
-
-  qMsg('yosi', '👍', 900, 150, true);
-
-  qMsg('valentina',
-    'סליחה אני לא הבינה... מה זה "כידוע"? 😅 לא ידעתי על זה. רק הגעתי הביתה מהעבודה',
-    1500);
-
-  qMsg('uri',
-    '"כידוע" = כפי שכולנו יודעים. זה ביטוי רשמי. ולנטינה — המעלית קלקלה לפני 13 יום 📋',
-    1400);
-
-  qMsg('miriam',
-    '13 יום!! אני אמרתי שבועיים!! מישהו כאן מאזין??',
-    1000);
-
-  qMsg('yosi', '😂', 700, 100, true);
-
-  // CHOICE 1
-  qChoice([
-    {
-      text: 'היי לכולם! אני שכן חדש — שמח לעזור בנושא המעלית 😊 יש משהו שאני יכול לעשות?',
-      fx: { miriam: 12, uri: 10, valentina: 18 },
-      goal: 15
-    },
-    {
-      text: '3,200?? זה לא יקר מדי? צריך לקבל לפחות שתי הצעות מחיר נוספות 🤔',
-      fx: { yosi: 12, uri: -10, miriam: -6 },
-      goal: 5
-    },
-    {
-      text: '👍',
-      fx: { yosi: 18, miriam: -20 },
-      goal: 0,
-      path: 'thumbs'
+  // ── Branch messages: pick by currentPath or "default" ──
+  if (beat.branchMessages) {
+    const msgs = beat.branchMessages[currentPath] || beat.branchMessages["default"] || [];
+    msgs.forEach(m => qMsg(m.from, m.text, m.typingMs, m.delay, m.isEmoji));
+    if (beat.autoNext) {
+      enq((done) => { done(); runBeat(beat.autoNext); });
     }
-  ]);
+    return;
+  }
 
-  // Reactions to choice 1 (always play, flavor based on path later)
-  enq((done) => {
-    if (choicePath === 'thumbs') {
-      // יוסי loves it, מרים is furious
-      qMsg('yosi', '😂😂 ניצחת אותי בלייזי', 900);
-      qMsg('miriam', 'שכן חדש!! זה הכל מה שיש לך להגיד?! 👍?! 😤😤', 1400);
-    } else {
-      qMsg('uri', 'תודה לשכן החדש! נשמח לשמוע עוד קולות בוועד 💪', 1400);
-      qMsg('valentina', 'כן כן! שכן חדש נחמד מאוד! 😊', 900);
-    }
-    done();
-  });
+  // ── Regular beat: queue messages then choices or ending ──
+  if (beat.messages) {
+    beat.messages.forEach(m => {
+      if (m.from === "_notify") {
+        qNotify(m.text, m.delay);
+      } else {
+        qMsg(m.from, m.text, m.typingMs, m.delay, m.isEmoji);
+      }
+    });
+  }
 
-  // ========== BEAT 2: THE DOG DRAMA ==========
-  qWait(400);
+  // Ending beat
+  if (beat.ending) {
+    enq((done) => {
+      setGoal(currentEpisode.endings[beat.ending].goalScore || 100);
+      setTimeout(() => showEnd(beat.ending), 800);
+      done();
+    });
+    return;
+  }
 
-  qMsg('liat',
-    'אנחנו בעצם תמיד לוקחים מדרגות כי ניצן צריך לצאת 🐕 אז לא ממש משפיע עלינו... אבל כן תקנו בשביל כולם!',
-    1600);
+  // Choice beat
+  if (beat.choices) {
+    qChoicePrompt(beat.choices);
+    return;
+  }
 
-  qMsg('miriam',
-    'ניצן!! 😤 הכלב שלכם עשה שוב על הסף של קומה 2!! זה לא בית — זה לא חווה — זה בניין מגורים!!',
-    2100);
+  // autoNext (no choices, no ending)
+  if (beat.autoNext) {
+    enq((done) => { done(); runBeat(beat.autoNext); });
+  }
+}
 
-  qMsg('liat',
-    'מרים, הוא גור 🥺 הוא עדיין לומד. אנחנו מתאמנים איתו כל יום, מבטיחה!',
-    1400);
+// ─── LOAD EPISODE ──────────────────────────────────────────────
+function loadEpisode(episode) {
+  currentEpisode = episode;
 
-  qMsg('miriam',
-    'הוא לומד?!! הוא כבר שנה בבניין!! מתי בדיוק הוא יגמור ללמוד?! יש לו תוכנית לימודים? מסלול? סיום שנה?! 📚😤',
-    2300);
+  // Reset state
+  scores = Object.assign({}, episode.initialScores);
+  goalPct = 0;
+  currentPath = null;
+  msgTime = { h: 10, m: 28 };
+  queue = [];
+  busy = false;
+  choiceDone = null;
+  window._pendingChoices = null;
 
-  qMsg('liat',
-    'ניצן הוא לא ילד, הוא כלב 😅 כלבים לוקחים יותר זמן—',
-    1200);
+  // Reset UI
+  document.getElementById('chat-messages').innerHTML =
+    `<div class="date-divider"><span>${episode.dateLabel || 'היום'}</span></div>`;
+  document.getElementById('choice-area').classList.remove('on');
+  document.getElementById('choices-list').innerHTML = '';
+  hideTyping();
+  setGoal(0);
+  document.getElementById('goal-text').textContent = episode.goal;
 
-  qMsg('miriam',
-    'כל כלב שאני מכירה לא עשה על המדרגות אחרי שנה!! 🚫🐕',
-    1100);
+  renderSidebar();
 
-  qMsg('yosi', '...🍿', 800, 100);
-
-  // CHOICE 2
-  qChoice([
-    {
-      text: 'ניצן כל כך חמוד 🐕 ראיתי אותו אתמול בכניסה — ממש מגניב!',
-      fx: { liat: 18, miriam: -20 },
-      goal: 0
-    },
-    {
-      text: 'אולי פשרה: ניצן יוצא רק דרך הכניסה הצדדית? כדי לשמור על שקט לכולם 🤝',
-      fx: { liat: 8, miriam: 10, uri: 7 },
-      goal: 12
-    },
-    {
-      text: '[לא מגיב — ממשיך לקרוא]',
-      fx: { liat: -12, miriam: -12 },
-      goal: -5,
-      path: 'silent'
-    }
-  ]);
-
-  // Post-choice-2 reactions
-  enq((done) => {
-    if (choicePath === 'silent') {
-      qMsg('miriam', 'שכן חדש גם שותק?! מושלם. עוד אחד. 😑', 1200);
-      qMsg('liat', 'כולם בוחרים צד חוץ ממנו... 😢', 900);
-    } else {
-      qMsg('miriam', 'בכל מקרה — הנושא הזה לא נגמר! אני מצפה לתשובה רשמית מהוועד!', 1400);
-      qMsg('uri', 'מרים, נכלול את זה בסדר יום האסיפה הבאה. 📋', 1000);
-      qMsg('valentina', 'מה זה "אסיפה"? כמו собрание? 🤔 גם בנין שלנו עשה! רק שאיש לא הגיע 😅', 1400);
-      qMsg('miriam', 'ולנטינה יקירה, כן — בדיוק. ופה אנחנו נגיע. כולם. 👀', 1200);
-    }
-    done();
-  });
-
-  // ========== BEAT 3: THE VOTE ==========
-  qWait(500);
-
-  qMsg('uri',
-    'חברים, בואו נחזור לנושא המעלית 🏗️ אני מציע להצביע רשמית: מי <strong>בעד</strong> לאשר תיקון בעלות 3,200 ש"ח?',
-    2000);
-
-  qMsg('uri', '✋ בעד — אורי, קומה 4', 600);
-
-  qMsg('miriam',
-    '✋ בעד!! (ואגב — מי שילם חשבון מים מאי?! אני עדיין ממתינה לתשובה 👀)',
-    1600);
-
-  qMsg('liat',
-    '✋ אנחנו בעד! אבל בתנאי שנוסיף לסדר יום גם <strong>תקנון כלבים</strong> בבניין 🐾 זה גם חשוב',
-    1800);
-
-  // יוסי "reads" but doesn't respond
-  qWait(1800);
-  enq((done) => {
-    notify('יוסי ראה את כל ההודעות... 👀 אבל עדיין לא ענה');
-    done();
-  });
-  qWait(1000);
-
-  qMsg('valentina',
-    'מה זה "מניין"? צריך מינימום כמה? 🙃',
-    1500);
-
-  qMsg('uri',
-    '"מניין" = מספר מינימלי של מצביעים. בוועד שלנו: 4 מתוך 6 בעלי דירות. יש לנו 3. חסר בדיוק <strong>עוד אחד</strong> 🎯',
-    1800);
-
-  qMsg('valentina', 'אה ז-ז-זה כמו kvorum ברוסית!! 😄 הייתי בדירת שותפים ברוסיה וגם עשינו הצבעות — אף אחד לא הגיע 😂', 1400);
-
-  // CHOICE 3
-  qChoice([
-    {
-      text: '✋ בעד! נשלים את המניין ונתקן את המעלית! 💪',
-      fx: { uri: 18, miriam: 12, valentina: 8 },
-      goal: 45,
-      path: 'vote'
-    },
-    {
-      text: 'לפני שמצביעים — מי בדיוק מכסה את העלות? שוכרים? בעלי דירות? יש תקנון? 🤔',
-      fx: { uri: -8, yosi: 12, valentina: 10, liat: 5 },
-      goal: 18,
-      path: 'negotiate'
-    },
-    {
-      text: '@יוסי אחי, מה אתה חושב? כולם מחכים לך 😄',
-      fx: { yosi: 20, uri: 6 },
-      goal: 12,
-      path: 'yosi'
-    }
-  ]);
-
-  // ========== BEAT 4: RESOLUTION ==========
-  enq((done) => {
-    const p = choicePath;
-
-    if (p === 'vote') {
-      // ── SUCCESS PATH ──
-      qMsg('uri', 'מצוין!!! 🎉🎉 יש מניין! ההצבעה עברה — תיקון המעלית מאושר!', 1400);
-      qMsg('miriam', 'סוף סוף!! מישהו פה עושה משהו!! 🙏🙏 אמן!!', 1200);
-      qMsg('valentina', 'יאי!! 🎉 לא הבנתי הכל אבל אני מרגישה חלק מהקבוצה!!', 1400);
-      qMsg('liat', 'ניצן גם שמח!! 🐕🎉', 800);
-      qMsg('miriam', 'ניצן לא גר פה רשמית. ניצן לא מצביע. ניצן — כ-ל-ב.', 1200);
-      qMsg('yosi', '😂😂😂 מרים את הפוסט של הבוקר', 800, 100);
-      qMsg('uri', '📞 דיברתי עם הטכנאי — הוא מגיע מחר בין 8-12. תודה לכולם, ובמיוחד לשכן החדש! ✓✓', 2200);
-      qWait(500);
-      enq((done2) => { setGoal(100); setTimeout(() => showEnd('vote'), 800); done2(); });
-
-    } else if (p === 'negotiate') {
-      // ── SMART PATH ──
-      qMsg('uri', 'שאלה מצוינת... 🤔 לפי תקנון הבית: בעלי דירות 70%, שוכרים 30% מהתשלום.', 1800);
-      qMsg('miriam', 'שכן חדש צודק!! אני שילמתי כבר 5 פעמים על תיקונים!! מה עם קופת הוועד?!', 2000);
-      qMsg('uri', 'מרים, הקופה אזלה על תיקון הגג אחרי הגשמים. תזכרי? 😅', 1600);
-      qMsg('miriam', 'אני זוכרת הכל!! זו בדיוק הבעיה!! 😤', 1000);
-      qMsg('valentina', 'בבלארוס המדינה מתקנת הכל 🤷 כאן צריך לשלם לבד? קצת עצוב...', 1400);
-      qMsg('yosi', '...', 800);
-      qMsg('miriam', 'יוסי!! שמענו שאתה בעל דירה!! עכשיו!! תצביע!!', 1200);
-      qMsg('yosi', 'אוקי אוקי ✋ בעד. עכשיו תעזבו אותי אני באמצע סרט 🍿', 1600);
-      qMsg('uri', '🎉 יש מניין! תודה לשכן החדש שהעלה שאלה חכמה! מחר מגיע הטכנאי.', 1800);
-      qWait(400);
-      enq((done2) => { setGoal(100); setTimeout(() => showEnd('negotiate'), 800); done2(); });
-
-    } else if (p === 'yosi') {
-      // ── YOSI PATH ──
-      qMsg('yosi', 'וואו. מישהו שאל אותי. 😮 אני... לא בטוח? אני בקומה 2, לא ממש מפריע לי...', 1800);
-      qMsg('miriam', 'יוסי!!! שאלו אותך!! עכשיו תצביע!!', 1200);
-      qMsg('yosi', 'בסדר שנייה. ✋ בעד. אבל אם יש אחר כך פיצה — אני מגיע לאסיפה 🍕', 1600);
-      qMsg('uri', '🎉 יש מניין!! ההצבעה עברה!', 900);
-      qMsg('liat', 'יוסי ❤️ ניצן אוהב אותך!', 800);
-      qMsg('yosi', '...בסדר. את הכלב אני קצת אוהב. אל תספרו למרים 🤫', 1400);
-      qMsg('miriam', 'ראיתי!! 😤😤😤', 800);
-      qMsg('valentina', 'LMAO זה מצחיק ב-כל-השפות 😂🌍', 1200);
-      qMsg('uri', 'ממ... בכל אופן. מחר מגיע הטכנאי. תודה לכולם. ✓✓', 1600);
-      qWait(400);
-      enq((done2) => { setGoal(100); setTimeout(() => showEnd('yosi'), 800); done2(); });
-
-    } else {
-      // fallback — thumbs path still resolves
-      qMsg('uri', 'אוקי... נראה שצריך לנסות שוב. 😐', 1400);
-      qWait(400);
-      enq((done2) => { setGoal(60); setTimeout(() => showEnd('vote'), 800); done2(); });
-    }
-
-    done();
-  });
+  // Start at first beat
+  runBeat(episode.beats[0].id);
 }
 
 // ─── END SCREEN ────────────────────────────────────────────────
-const END_DATA = {
-  vote: {
-    headline: 'המעלית תתוקן! שכן חדש מחזיר את הסדר לבניין',
-    sub: '"שכן חדש מביא אחדות לוועד — מרים עדיין יש לה שאלות על חשבון המים"',
-    badgeIcon: '🤝',
-    badgeLabel: '"מארגן הבניין" — איחדת את הקבוצה ברגע הנכון!'
-  },
-  negotiate: {
-    headline: 'מניין הושג — שאלה אחת שינתה הכל',
-    sub: '"שכן חדש מוכיח: לשאול שאלות חכמות זה גם מין אומנות — יוסי עדיין לא ענה"',
-    badgeIcon: '🧠',
-    badgeLabel: '"מו"מניסט חכם" — אחת ושינית את מהלך ההצבעה!'
-  },
-  yosi: {
-    headline: 'יוסי יצא מהסרט לרגע — המעלית תתוקן',
-    sub: '"שכן חדש מוכיח: כדי לגרום ליוסי לנוע צריך לשאול אותו ישירות"',
-    badgeIcon: '😎',
-    badgeLabel: '"חבר של יוסי" — הצלחת לגרום ליוסי לזוז מהספה!'
-  }
-};
-
-function showEnd(path) {
-  const d = END_DATA[path] || END_DATA.vote;
+function showEnd(endingKey) {
+  const d = currentEpisode.endings[endingKey];
+  if (!d) return;
 
   document.getElementById('end-headline').textContent = d.headline;
-  document.getElementById('end-sub').textContent = d.sub;
-  document.getElementById('badge-icon').textContent = d.badgeIcon;
-  document.getElementById('badge-label').textContent = d.badgeLabel;
+  document.getElementById('end-sub').textContent      = d.sub;
+  document.getElementById('badge-icon').textContent   = d.badgeIcon;
+  document.getElementById('badge-label').textContent  = d.badgeLabel;
 
   const metersDiv = document.getElementById('end-meters');
-  metersDiv.innerHTML = '<div style="font-size:12px;color:#8696a0;margin-bottom:12px;text-align:right">📊 יחסי שכנות סופיים:</div>' +
-    Object.entries(CHARS).map(([id, c]) => {
-      const s = scores[id];
+  metersDiv.innerHTML =
+    '<div style="font-size:12px;color:#8696a0;margin-bottom:12px;text-align:right">📊 יחסי שכנות סופיים:</div>' +
+    currentEpisode.activeChars.map(id => {
+      const c = CHARACTERS[id];
+      const s = scores[id] || 50;
       return `
         <div class="end-meter-row">
-          <div class="em-avatar" style="background:${c.color}">${c.short}</div>
+          <div class="em-avatar" style="background:${c.color}">${c.avatar}</div>
           <div class="em-info">
             <div class="em-name">${c.name}</div>
             <div class="em-vibe">${vibeText(s)}</div>
@@ -953,47 +833,55 @@ function showEnd(path) {
   }, 200);
 }
 
-// ─── REPLAY ────────────────────────────────────────────────────
-function replayGame() {
+// ─── REPLAY CURRENT EPISODE ────────────────────────────────────
+function replayEpisode() {
   document.getElementById('end-screen').classList.remove('on');
-
-  // reset chat
-  document.getElementById('chat-messages').innerHTML =
-    '<div class="date-divider"><span>היום, יום שני</span></div>';
-
-  // reset state
-  scores = { uri: 50, miriam: 50, yosi: 50, liat: 50, valentina: 50 };
-  goalPct = 0;
-  choicePath = null;
-  msgTime = { h: 10, m: 28 };
-  queue = [];
-  busy = false;
-  choiceDone = null;
-  window._choices = null;
-
-  document.getElementById('choice-area').classList.remove('on');
-  document.getElementById('choices-list').innerHTML = '';
-  hideTyping();
-
-  renderSidebar();
-  setGoal(0);
-  runEp1();
+  if (currentEpisode) loadEpisode(currentEpisode);
 }
 
-// ─── START ─────────────────────────────────────────────────────
-function startGame() {
+// ─── EPISODE SELECT SCREEN ─────────────────────────────────────
+function showEpisodeSelect() {
+  document.getElementById('end-screen').classList.remove('on');
+  const intro = document.getElementById('intro-screen');
+  intro.style.display  = 'flex';
+  intro.style.animation = 'none';
+  intro.style.opacity  = '1';
+  intro.style.pointerEvents = 'auto';
+  intro.classList.remove('hidden');
+}
+
+function buildEpisodeCards() {
+  const grid = document.getElementById('ep-grid');
+  grid.innerHTML = EPISODES.map(ep => {
+    const locked = false; // all unlocked for now
+    return `
+      <div class="ep-card${locked ? ' locked' : ''}" onclick="${locked ? '' : `startEpisode(${ep.id})`}">
+        ${locked ? '<div class="ep-lock-badge">🔒</div>' : ''}
+        <div class="ep-card-emoji">${ep.emoji || '🏠'}</div>
+        <div class="ep-card-num">פרק ${ep.id}</div>
+        <div class="ep-card-title">${ep.title}</div>
+        <div class="ep-card-sub">${ep.subtitle}</div>
+        ${!locked ? '<div class="ep-play-hint">▶ שחק עכשיו</div>' : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function startEpisode(id) {
   beep(660, 0.1);
+
+  const episode = EPISODES.find(e => e.id === id);
+  if (!episode) return;
 
   const intro = document.getElementById('intro-screen');
   intro.classList.add('hidden');
   setTimeout(() => { intro.style.display = 'none'; }, 600);
 
-  renderSidebar();
-  setGoal(0);
-  runEp1();
+  loadEpisode(episode);
 }
 
-// init sidebar on load
+// ─── INIT ──────────────────────────────────────────────────────
+buildEpisodeCards();
 renderSidebar();
 </script>
 </body>
