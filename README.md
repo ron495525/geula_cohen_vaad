@@ -2,8 +2,6 @@
 
 > *A WhatsApp group simulator set in an Israeli apartment building. Drama included.*
 
-**[▶ Play Now → aviz85.github.io/yehuda-game](https://aviz85.github.io/yehuda-game/)**
-
 ---
 
 ## What is this?
@@ -44,39 +42,7 @@ Every decision affects your relationships. Every neighbor has an agenda. The ele
 | 3 | **ניצן** | Resolve the dog situation once and for all | 🔜 Coming soon |
 | 4 | **הבחירות** | Become (or stop) the new committee chair | 🔜 Coming soon |
 
----
 
-## Stack
-
-Pure HTML/CSS/JS — zero dependencies, zero build step.
-
-```
-index.html          ← game shell + engine
-episodes/
-  episode-1.js      ← המעלית
-  episode-2.js      ← גינת הגג (coming soon)
-characters.js       ← neighbor data & portraits
-```
-
----
-
-## Run Locally
-
-```bash
-git clone https://github.com/aviz85/yehuda-game
-cd yehuda-game
-open index.html     # or just drag into browser
-```
-
----
-
-## Contributing
-
-Want to write an episode? Each episode is a self-contained JS file with a story script array. See `episodes/episode-1.js` for the format.
-
-PRs welcome. Especially if your Hebrew is better than ולנטינה's.
-
----
 
 *Built with Israeli humor, WhatsApp PTSD, and a healthy fear of building WhatsApp groups.*
 "# geula_cohen_vaad" 
