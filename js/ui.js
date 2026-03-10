@@ -35,14 +35,31 @@ function notify(text) {
   _notifTimer = setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-// ── Typing indicator ──────────────────────────────────────────────
-function showTyping(name) {
-  document.getElementById('typing-name').textContent = name + ' מקליד/ה...';
-  document.getElementById('typing-area').classList.add('on');
-  document.getElementById('chat-messages').scrollTop = 9999;
+// ── Typing indicator (inline in chat like WhatsApp) ──────────────
+function showTyping(charId) {
+  hideTyping();
+  const c = CHARACTERS[charId];
+  const chat = document.getElementById('chat-messages');
+  const wrap = document.createElement('div');
+  wrap.className = 'msg-wrap other';
+  wrap.id = 'typing-bubble';
+  wrap.innerHTML = `
+    <div class="msg-inner">
+      <div class="msg-avatar" style="background:${c.color}">${c.avatar}</div>
+      <div class="msg-bubble">
+        <div class="msg-sender" style="color:${c.color};margin-bottom:2px;">${c.name}</div>
+        <div class="typing-pill">
+          <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
 }
 function hideTyping() {
-  document.getElementById('typing-area').classList.remove('on');
+  const el = document.getElementById('typing-bubble');
+  if (el) el.remove();
 }
 
 // ── Chat messages ─────────────────────────────────────────────────
@@ -142,6 +159,11 @@ function renderChoices(choices) {
   `).join('');
   window._pendingChoices = choices;
   area.classList.add('on');
+  // Auto-scroll chat so choices don't cover messages
+  setTimeout(() => {
+    const chat = document.getElementById('chat-messages');
+    chat.scrollTop = chat.scrollHeight;
+  }, 100);
 }
 function hideChoices() {
   document.getElementById('choice-area').classList.remove('on');

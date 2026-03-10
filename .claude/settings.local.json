@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"/c/Users/admin/Desktop/SAAS/vaad/\" | grep -E \"\\\\.\\(jpg|jpeg|png|gif|webp|svg\\)$\")"
+    ]
+  }
+}

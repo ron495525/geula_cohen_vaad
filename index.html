@@ -358,12 +358,6 @@ body {
 .emoji-msg .msg-bubble::before { display: none !important; }
 
 /* ─── TYPING ─── */
-#typing-area {
-  padding: 2px 14px 4px;
-  display: none;
-  background-color: #efeae2;
-}
-#typing-area.on { display: flex; align-items: center; gap: 8px; }
 .typing-pill {
   background: #ffffff;
   border-radius: 7.5px 7.5px 7.5px 0;
@@ -388,6 +382,8 @@ body {
   display: none;
 }
 #choice-area.on { display: block; }
+#choice-area.on ~ #chat-messages,
+#chat-col:has(#choice-area.on) #chat-messages { scroll-padding-bottom: 20px; }
 #choice-hint { font-size: 11px; color: #667781; text-align: center; margin-bottom: 7px; }
 .choice-btn {
   display: flex;
@@ -568,7 +564,7 @@ body {
 }
 .ri-bg {
   position: absolute; inset: 0;
-  background: url('poster.jpg') center 10% / contain no-repeat;
+  background: url('poster.png') center 10% / contain no-repeat;
 }
 .ri-scanlines {
   position: absolute; inset: 0; z-index: 3;
@@ -694,7 +690,7 @@ body {
   <div id="header-back" onclick="goBackToIntro()">→</div>
   <div id="header-avatar">🏠</div>
   <div id="header-info">
-    <div id="header-title">ועד הבניין | רח' הפרחים 12</div>
+    <div id="header-title">בניין 2 - קבוצה פתוחה לדיונים</div>
     <div id="header-sub">
       <span class="header-online-dot"></span>
       <span>מחובר</span>
@@ -727,12 +723,6 @@ body {
   <div id="chat-col">
     <div id="chat-messages">
       <div class="date-divider"><span>היום, יום שני</span></div>
-    </div>
-    <div id="typing-area">
-      <div class="typing-pill">
-        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-      </div>
-      <div id="typing-name"></div>
     </div>
     <div id="choice-area">
       <div id="choice-hint">💬 בחר את התגובה של יהודה</div>

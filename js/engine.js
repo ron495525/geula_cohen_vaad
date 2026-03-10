@@ -38,12 +38,23 @@ function pump() {
 function qMsg(charId, text, typingMs, pauseMs, isEmoji) {
   enq((done) => {
     const c = CHARACTERS[charId];
-    showTyping(c.name);
+    // Random pre-typing pause (like someone reading before replying)
+    const preDelay = Math.floor(Math.random() * 1200) + 800;
     setTimeout(() => {
-      hideTyping();
-      addMsg({ charId, text, isEmoji: !!isEmoji });
-      setTimeout(done, pauseMs || 250);
-    }, typingMs || 1200);
+      showTyping(charId);
+      // Typing duration scales with message length for realism
+      const baseTyping = typingMs || 1800;
+      const jitter = Math.floor(Math.random() * 800) - 200;
+      const actualTyping = Math.max(1000, baseTyping + jitter);
+      setTimeout(() => {
+        hideTyping();
+        addMsg({ charId, text, isEmoji: !!isEmoji });
+        // Longer pause between messages so chat feels natural
+        const basePause = pauseMs || 600;
+        const actualPause = Math.max(500, basePause + Math.floor(Math.random() * 800) + 400);
+        setTimeout(done, actualPause);
+      }, actualTyping);
+    }, preDelay);
   });
 }
 
