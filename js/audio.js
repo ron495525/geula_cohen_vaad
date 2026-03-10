@@ -64,11 +64,11 @@ const GameAudio = (() => {
     if (!_musicOn || !_rCtx) return;
     const ctx = _rCtx;
     let t = start, bt = start;
-    MELODY.forEach(([f,b]) => { _note(ctx, f, t, b*RB*0.88, 'square',   0.11); t  += b*RB; });
-    BASS.forEach(  ([f,b]) => { _note(ctx, f, bt,b*RB*0.72, 'triangle', 0.18); bt += b*RB; });
+    MELODY.forEach(([f,b]) => { _note(ctx, f, t, b*RB*0.88, 'square',   0.055); t  += b*RB; });
+    BASS.forEach(  ([f,b]) => { _note(ctx, f, bt,b*RB*0.72, 'triangle', 0.09); bt += b*RB; });
     const total = MELODY.reduce((s,[,b]) => s+b, 0);
     for (let i = 0; i < total*2; i++)
-      _note(ctx, i%2 ? 880 : 660, start + i*RB*0.5, 0.04, 'sine', 0.035);
+      _note(ctx, i%2 ? 880 : 660, start + i*RB*0.5, 0.04, 'sine', 0.018);
     _rTimer = setTimeout(() => _loop(start + total*RB), (total*RB - 0.15)*1000);
   }
 

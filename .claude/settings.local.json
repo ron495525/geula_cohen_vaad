@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls -la \"/c/Users/admin/Desktop/SAAS/vaad/\" | grep -E \"\\\\.\\(jpg|jpeg|png|gif|webp|svg\\)$\")"
+      "Bash(ls -la \"/c/Users/admin/Desktop/SAAS/vaad/\" | grep -E \"\\\\.\\(jpg|jpeg|png|gif|webp|svg\\)$\")",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('C:/Users/admin/Desktop/SAAS/vaad/poster.png'\\); print\\(img.size\\)\")"
     ]
   }
 }

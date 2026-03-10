@@ -3,6 +3,15 @@
 // ─── GAME UI ──────────────────────────────────────────────────────
 // All DOM rendering: messages, sidebar, choices, end screen, episode select
 
+// ── Reliable scroll-to-bottom (works on Android + iOS) ───────────
+function _scrollChat(el) {
+  requestAnimationFrame(() => {
+    el.scrollTop = el.scrollHeight;
+    // Double-tap for mobile browsers that delay layout
+    setTimeout(() => { el.scrollTop = el.scrollHeight; }, 50);
+  });
+}
+
 // ── Time simulation ───────────────────────────────────────────────
 let msgTime = { h: 10, m: 28 };
 
@@ -55,7 +64,7 @@ function showTyping(charId) {
     </div>
   `;
   chat.appendChild(wrap);
-  chat.scrollTop = chat.scrollHeight;
+  _scrollChat(chat);
 }
 function hideTyping() {
   const el = document.getElementById('typing-bubble');
@@ -91,7 +100,7 @@ function addMsg(opts) {
     </div>
   `;
   chat.appendChild(wrap);
-  chat.scrollTop = chat.scrollHeight;
+  _scrollChat(chat);
   if (!isPlayer) GameAudio.beep(780 + Math.random() * 120, 0.1);
 }
 
@@ -102,7 +111,7 @@ function addSystemMsg(text) {
   div.style.cssText = 'text-align:center;margin:10px 0;';
   div.innerHTML = `<span style="background:rgba(0,168,132,0.12);color:#00a884;font-size:11px;padding:5px 14px;border-radius:8px;border:1px solid rgba(0,168,132,0.3);display:inline-block;">${text}</span>`;
   chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
+  _scrollChat(chat);
 }
 
 // ── Sidebar (relationship meters) ─────────────────────────────────
@@ -162,7 +171,7 @@ function renderChoices(choices) {
   // Auto-scroll chat so choices don't cover messages
   setTimeout(() => {
     const chat = document.getElementById('chat-messages');
-    chat.scrollTop = chat.scrollHeight;
+    _scrollChat(chat);
   }, 100);
 }
 function hideChoices() {
