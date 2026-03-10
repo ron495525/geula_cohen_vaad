@@ -66,10 +66,8 @@ function qChoicePrompt(choices) {
 
 // ── Choice handler (called from rendered HTML) ────────────────────
 function makeChoice(i) {
-  hideChoices();
-
   const choice = window._pendingChoices[i];
-  window._pendingChoices = null;
+  hideChoices();
 
   addMsg({ text: choice.text, isPlayer: true, isEmoji: !!choice.isEmoji });
   GameAudio.beep(660, 0.08);
